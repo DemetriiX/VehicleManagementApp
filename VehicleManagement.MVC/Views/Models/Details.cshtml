@@ -1,0 +1,11 @@
+﻿@model VehicleManagement.Service.ViewModels.VehicleModelViewModel
+
+<h1>Vehicle Model Details</h1>
+
+<div>
+    <h4>Name: @Model.Name</h4>
+    <h4>Make: @Model.Make.Name</h4>
+    <h4>Abbreviation: @Model.Abrv</h4>
+</div>
+
+<a asp-controller="VehicleModel" asp-action="Index">Back to List</a>
