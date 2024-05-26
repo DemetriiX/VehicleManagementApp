@@ -1,4 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Ninject;
+using Ninject.Modules;
 using VehicleManagement.Service.Data;
 using VehicleManagement.Service.Interfaces;
 using VehicleManagement.Service.Services;
@@ -40,22 +42,16 @@ namespace VehicleManagement.MVC
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
-            {
-               
-                endpoints.MapControllerRoute(
-                    name: "vehicleMake",
-                    pattern: "VehicleMake/{action}/{id?}",
-                    defaults: new { controller = "VehicleMake", action = "Index" });
-
-                endpoints.MapControllerRoute(
-                    name: "vehicleModel",
-                    pattern: "VehicleModel/{action}/{id?}",
-                    defaults: new { controller = "VehicleModel", action = "Index" });
-
+            {         
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+        }
+
+        public void ConfigureContainer(IKernel kernel)
+        {
+            kernel.Load(new NinjectModuleBindings());
         }
     }
 }

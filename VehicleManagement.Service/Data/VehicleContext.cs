@@ -17,9 +17,5 @@ namespace VehicleManagement.Service.Data
         {
         }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            // Fluent API configurations if needed
-        }
     }
 }
