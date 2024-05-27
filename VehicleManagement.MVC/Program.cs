@@ -1,5 +1,8 @@
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using VehicleManagement.MVC;
+using VehicleManagement.Service.Data;
+using VehicleManagement.Service.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,6 +10,11 @@ builder.Configuration.AddJsonFile("appsettings.json", optional: true, reloadOnCh
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddDbContext<VehicleContext>(o =>
+{
+    o.UseSqlServer(builder.Configuration.GetConnectionString("VehicleContext"));
+});
+builder.Services.AddScoped<IVehicleService, VehicleManagement.Service.Services.VehicleService>();
 
 var app = builder.Build();
 
