@@ -1,4 +1,4 @@
-﻿namespace VehicleManagement.Service.ViewModels
+﻿namespace VehicleManagement.Shared.ViewModels
 {
     public class VehicleMakeViewModel
     {

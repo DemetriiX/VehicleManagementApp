@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using VehicleManagement.Service.ViewModels;
+using VehicleManagement.Shared.ViewModels;
 using VehicleManagement.Service.Interfaces;
 using VehicleManagement.Service.Models;
 

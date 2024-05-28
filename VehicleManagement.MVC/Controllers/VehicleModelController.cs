@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using VehicleManagement.Service.ViewModels;
+using VehicleManagement.Shared.ViewModels;
 using VehicleManagement.Service.Interfaces;
 using VehicleManagement.Service.Models;
 

@@ -3,6 +3,7 @@ using Ninject;
 using Ninject.Modules;
 using VehicleManagement.Service.Data;
 using VehicleManagement.Service.Interfaces;
+using VehicleManagement.Service.Mapping;
 using VehicleManagement.Service.Services;
 
 namespace VehicleManagement.MVC
@@ -21,7 +22,7 @@ namespace VehicleManagement.MVC
             services.AddControllersWithViews();
             services.AddDbContext<VehicleContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddAutoMapper(typeof(Startup));
+            services.AddAutoMapper(typeof(MappingProfile));
             services.AddScoped<IVehicleService, VehicleService>();
         }
 
@@ -51,7 +52,7 @@ namespace VehicleManagement.MVC
 
         public void ConfigureContainer(IKernel kernel)
         {
-            kernel.Load(new NinjectModuleBindings());
+            kernel.Load(new NinjectModuleBindings(Configuration));
         }
     }
 }

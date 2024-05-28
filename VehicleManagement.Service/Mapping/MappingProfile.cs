@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using VehicleManagement.Service.Models;
-using VehicleManagement.Service.ViewModels;
+using VehicleManagement.Shared.ViewModels;
 
 
 namespace VehicleManagement.Service.Mapping

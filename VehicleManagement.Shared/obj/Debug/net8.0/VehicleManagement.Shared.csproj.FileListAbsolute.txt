@@ -1,0 +1,12 @@
+C:\Users\dvese\Documents\GitHub\VehicleManagementApp\VehicleManagement.Shared\bin\Debug\net8.0\VehicleManagement.Shared.deps.json
+C:\Users\dvese\Documents\GitHub\VehicleManagementApp\VehicleManagement.Shared\bin\Debug\net8.0\VehicleManagement.Shared.dll
+C:\Users\dvese\Documents\GitHub\VehicleManagementApp\VehicleManagement.Shared\bin\Debug\net8.0\VehicleManagement.Shared.pdb
+C:\Users\dvese\Documents\GitHub\VehicleManagementApp\VehicleManagement.Shared\obj\Debug\net8.0\VehicleManagement.Shared.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\dvese\Documents\GitHub\VehicleManagementApp\VehicleManagement.Shared\obj\Debug\net8.0\VehicleManagement.Shared.AssemblyInfoInputs.cache
+C:\Users\dvese\Documents\GitHub\VehicleManagementApp\VehicleManagement.Shared\obj\Debug\net8.0\VehicleManagement.Shared.AssemblyInfo.cs
+C:\Users\dvese\Documents\GitHub\VehicleManagementApp\VehicleManagement.Shared\obj\Debug\net8.0\VehicleManagement.Shared.csproj.CoreCompileInputs.cache
+C:\Users\dvese\Documents\GitHub\VehicleManagementApp\VehicleManagement.Shared\obj\Debug\net8.0\VehicleManagement.Shared.sourcelink.json
+C:\Users\dvese\Documents\GitHub\VehicleManagementApp\VehicleManagement.Shared\obj\Debug\net8.0\VehicleManagement.Shared.dll
+C:\Users\dvese\Documents\GitHub\VehicleManagementApp\VehicleManagement.Shared\obj\Debug\net8.0\refint\VehicleManagement.Shared.dll
+C:\Users\dvese\Documents\GitHub\VehicleManagementApp\VehicleManagement.Shared\obj\Debug\net8.0\VehicleManagement.Shared.pdb
+C:\Users\dvese\Documents\GitHub\VehicleManagementApp\VehicleManagement.Shared\obj\Debug\net8.0\ref\VehicleManagement.Shared.dll

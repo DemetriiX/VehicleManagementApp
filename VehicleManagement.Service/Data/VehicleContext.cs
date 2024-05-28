@@ -10,12 +10,13 @@ namespace VehicleManagement.Service.Data
 {
     public class VehicleContext : DbContext
     {
-        public DbSet<VehicleMake> VehicleMakes { get; set; }
-        public DbSet<VehicleModel> VehicleModels { get; set; }
-
-        public VehicleContext(DbContextOptions<VehicleContext> options) : base(options)
+        public VehicleContext(DbContextOptions<VehicleContext> options)
+            : base(options)
         {
         }
+
+        public DbSet<VehicleMake> VehicleMakes { get; set; }
+        public DbSet<VehicleModel> VehicleModels { get; set; }
 
     }
 }
