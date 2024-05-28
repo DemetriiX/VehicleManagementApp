@@ -1,17 +1,34 @@
 ﻿using System;
 using System.Linq;
+using VehicleManagement.Service.Models;
 
 public static class SortingHelper
 {
-    public static IQueryable<T> ApplySort<T>(IQueryable<T> source, string propertyName, bool ascending)
+    public static IQueryable<VehicleMake> ApplySorting(this IQueryable<VehicleMake> query, string sortOrder)
     {
-        if (string.IsNullOrEmpty(propertyName))
-            return source;
+        switch (sortOrder)
+        {
+            case "name_desc":
+                query = query.OrderByDescending(s => s.Name);
+                break;
+            default:
+                query = query.OrderBy(s => s.Name);
+                break;
+        }
+        return query;
+    }
 
-        var property = typeof(T).GetProperty(propertyName);
-        if (property == null)
-            return source;
-
-        return ascending ? source.OrderBy(x => property.GetValue(x, null)) : source.OrderByDescending(x => property.GetValue(x, null));
+    public static IQueryable<VehicleModel> ApplySorting(this IQueryable<VehicleModel> query, string sortOrder)
+    {
+        switch (sortOrder)
+        {
+            case "name_desc":
+                query = query.OrderByDescending(s => s.Name);
+                break;
+            default:
+                query = query.OrderBy(s => s.Name);
+                break;
+        }
+        return query;
     }
 }

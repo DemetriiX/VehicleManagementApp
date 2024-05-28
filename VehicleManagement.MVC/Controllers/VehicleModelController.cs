@@ -19,45 +19,12 @@ namespace VehicleManagement.MVC.Controllers
 
         public async Task<IActionResult> Index(string sortOrder, string searchString, int? pageNumber)
         {
-            ViewData["NameSortParam"] = string.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewData["CurrentSort"] = sortOrder;
+            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
 
+            var paginatedModels = await _modelService.GetModelsAsync(sortOrder, searchString, pageNumber ?? 1, 10);
 
-            if (searchString != null)
-            {
-                pageNumber = 1;
-            }
-
-            var models = await _modelService.GetAllModelsAsync();
-
-            // Filtering
-            if (!string.IsNullOrEmpty(searchString))
-            {
-                models = models.Where(s => s.Name.Contains(searchString));
-            }
-
-            // Sorting
-            switch (sortOrder)
-            {
-                case "name_desc":
-                    models = models.OrderByDescending(s => s.Name);
-                    break;
-
-                default:
-                    models = models.OrderBy(s => s.Name);
-                    break;
-            }
-
-            int pageSize = 10;
-            var paginatedMakes = await PagingHelper.CreateAsync(models.AsQueryable(), pageNumber ?? 1, pageSize);
-            return View(paginatedMakes);
-        }
-
-        public async Task<IActionResult> Details(int id)
-        {
-            var model = await _modelService.GetModelAsync(id);
-            if (model == null) return NotFound();
-            var modelViewModel = _mapper.Map<VehicleModelViewModel>(model);
-            return View(modelViewModel);
+            return View(paginatedModels);
         }
 
         public IActionResult Create()

@@ -1,25 +1,27 @@
-﻿@model IEnumerable<VehicleManagement.MVC.ViewModels.VehicleMakeViewModel>
+﻿@model PaginatedList<VehicleManagement.Service.Models.VehicleMake>
 
 @{
     ViewData["Title"] = "Vehicle Makes";
 }
 
-<h1>Vehicle Makes</h1>
+<h2>Vehicle Makes</h2>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    @using (Html.BeginForm("Index", "VehicleMake", FormMethod.Get))
+    {
+    <p>
+        Find by name: <input type="text" name="searchString" value="@ViewData["CurrentFilter"]" />
+        <input type="submit" value="Search" class="btn btn-default" />
+    </p>
+    }
 </p>
 
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Name)
+                @Html.ActionLink("Name", "Index", new { sortOrder = ViewBag.NameSortParm })
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Abrv)
-            </th>
-            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -29,14 +31,19 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Name)
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Abrv)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                </td>
             </tr>
         }
     </tbody>
 </table>
+
+<div>
+    Page @(Model.PageIndex) of @(Model.TotalPages)
+    @if (Model.HasPreviousPage)
+    {
+        @Html.ActionLink("Previous", "Index", new { pageNumber = Model.PageIndex - 1, sortOrder = ViewBag.CurrentSort })
+    }
+    @if (Model.HasNextPage)
+    {
+        @Html.ActionLink("Next", "Index", new { pageNumber = Model.PageIndex + 1, sortOrder = ViewBag.CurrentSort })
+    }
+</div>

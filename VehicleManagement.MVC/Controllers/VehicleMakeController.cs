@@ -21,47 +21,14 @@ namespace VehicleManagement.MVC.Controllers
 
         public async Task<IActionResult> Index(string sortOrder, string searchString, int? pageNumber)
         {
-            ViewData["NameSortParam"] = string.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-            
+            ViewData["CurrentSort"] = sortOrder;
+            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
 
-            if (searchString != null)
-            {
-                pageNumber = 1;
-            }
+            var paginatedMakes = await _makeService.GetMakesAsync(sortOrder, searchString, pageNumber ?? 1, 10);
 
-            var makes = await _makeService.GetAllMakesAsync();
-
-            // Filtering
-            if (!string.IsNullOrEmpty(searchString))
-            {
-                makes = makes.Where(s => s.Name.Contains(searchString));
-            }
-
-            // Sorting
-            switch (sortOrder)
-            {
-                case "name_desc":
-                    makes = makes.OrderByDescending(s => s.Name);
-                    break;
-                
-                default:
-                    makes = makes.OrderBy(s => s.Name);
-                    break;
-            }
-
-            int pageSize = 10;
-            var paginatedMakes = await PagingHelper.CreateAsync(makes.AsQueryable(), pageNumber ?? 1, pageSize);
             return View(paginatedMakes);
         }
-
-        public async Task<IActionResult> Details(int id)
-        {
-            var make = await _makeService.GetMakeAsync(id);
-            if (make == null) return NotFound();
-            var makeViewModel = _mapper.Map<VehicleMakeViewModel>(make);
-            return View(makeViewModel);
-        }
-
+        
         public IActionResult Create()
         {
             return View();

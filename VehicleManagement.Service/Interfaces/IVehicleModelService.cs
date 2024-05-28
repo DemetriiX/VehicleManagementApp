@@ -11,6 +11,7 @@ namespace VehicleManagement.Service.Interfaces
     {        
         Task<IEnumerable<VehicleModel>> GetAllModelsAsync();
         Task<VehicleModel> GetModelAsync(int id);
+        Task<PaginatedList<VehicleModel>> GetModelsAsync(string sortOrder, string searchString, int pageNumber, int pageSize);
         Task CreateModelAsync(VehicleModel model);
         Task UpdateModelAsync(VehicleModel model);
         Task DeleteModelAsync(int id);

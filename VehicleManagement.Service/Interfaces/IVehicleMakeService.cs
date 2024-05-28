@@ -11,6 +11,7 @@ namespace VehicleManagement.Service.Interfaces
     {
         Task<IEnumerable<VehicleMake>> GetAllMakesAsync();
         Task<VehicleMake> GetMakeAsync(int id);
+        Task<PaginatedList<VehicleMake>> GetMakesAsync(string sortOrder, string searchString, int pageNumber, int pageSize);
         Task CreateMakeAsync(VehicleMake make);
         Task UpdateMakeAsync(VehicleMake make);
         Task DeleteMakeAsync(int id);

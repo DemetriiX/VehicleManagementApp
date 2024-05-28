@@ -28,6 +28,15 @@ namespace VehicleManagement.Service.Services
         {
             return await _context.VehicleModels.Include(m => m.Make).FirstOrDefaultAsync(m => m.Id == id);
         }
+        public async Task<PaginatedList<VehicleModel>> GetModelsAsync(string sortOrder, string searchString, int pageNumber, int pageSize)
+        {
+            var query = _context.VehicleModels.AsQueryable();
+
+            query = query.ApplyFiltering(searchString);
+            query = query.ApplySorting(sortOrder);
+
+            return await PagingHelper.CreateAsync(query, pageNumber, pageSize);
+        }
 
         public async Task CreateModelAsync(VehicleModel model)
         {
