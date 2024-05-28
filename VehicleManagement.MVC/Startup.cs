@@ -23,7 +23,8 @@ namespace VehicleManagement.MVC
             services.AddDbContext<VehicleContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddAutoMapper(typeof(MappingProfile));
-            services.AddScoped<IVehicleService, VehicleService>();
+            services.AddScoped<IVehicleModelService, VehicleModelService>();
+            services.AddScoped<IVehicleMakeService, VehicleMakeService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

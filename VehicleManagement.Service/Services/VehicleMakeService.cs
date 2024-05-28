@@ -10,11 +10,11 @@ using VehicleManagement.Service.Models;
 
 namespace VehicleManagement.Service.Services
 {
-    public class VehicleService : IVehicleService
+    public class VehicleMakeService : IVehicleMakeService
     {
         private readonly VehicleContext _context;
 
-        public VehicleService(VehicleContext context)
+        public VehicleMakeService(VehicleContext context)
         {
             _context = context;
         }
@@ -50,37 +50,6 @@ namespace VehicleManagement.Service.Services
                 await _context.SaveChangesAsync();
             }
         }
-
-        public async Task<IEnumerable<VehicleModel>> GetAllModelsAsync()
-        {
-            return await _context.VehicleModels.Include(m => m.Make).ToListAsync();
-        }
-
-        public async Task<VehicleModel> GetModelAsync(int id)
-        {
-            return await _context.VehicleModels.Include(m => m.Make).FirstOrDefaultAsync(m => m.Id == id);
-        }
-
-        public async Task CreateModelAsync(VehicleModel model)
-        {
-            _context.VehicleModels.Add(model);
-            await _context.SaveChangesAsync();
-        }
-
-        public async Task UpdateModelAsync(VehicleModel model)
-        {
-            _context.Entry(model).State = EntityState.Modified;
-            await _context.SaveChangesAsync();
-        }
-
-        public async Task DeleteModelAsync(int id)
-        {
-            var model = await _context.VehicleModels.FindAsync(id);
-            if (model != null)
-            {
-                _context.VehicleModels.Remove(model);
-                await _context.SaveChangesAsync();
-            }
-        }
+        
     }
 }

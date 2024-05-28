@@ -18,7 +18,8 @@ namespace VehicleManagement.MVC
 
         public override void Load()
         {
-            Bind<IVehicleService>().To<VehicleService>();
+            Bind<IVehicleMakeService>().To<VehicleMakeService>();
+            Bind<IVehicleModelService>().To<VehicleModelService>();
 
             var optionsBuilder = new DbContextOptionsBuilder<VehicleContext>();
             optionsBuilder.UseSqlServer(_configuration.GetConnectionString("DefaultConnection"));

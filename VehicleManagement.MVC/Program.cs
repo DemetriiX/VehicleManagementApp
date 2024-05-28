@@ -14,7 +14,8 @@ builder.Services.AddDbContext<VehicleContext>(o =>
 {
     o.UseSqlServer(builder.Configuration.GetConnectionString("VehicleContext"));
 });
-builder.Services.AddScoped<IVehicleService, VehicleManagement.Service.Services.VehicleService>();
+builder.Services.AddScoped<IVehicleMakeService, VehicleManagement.Service.Services.VehicleMakeService>();
+builder.Services.AddScoped<IVehicleModelService, VehicleManagement.Service.Services.VehicleModelService>();
 
 var app = builder.Build();
 

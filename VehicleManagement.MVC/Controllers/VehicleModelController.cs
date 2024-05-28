@@ -8,25 +8,25 @@ namespace VehicleManagement.MVC.Controllers
 {
     public class VehicleModelController : Controller
     {
-        private readonly IVehicleService _vehicleService;
+        private readonly IVehicleModelService _modelService;
         private readonly IMapper _mapper;
 
-        public VehicleModelController(IVehicleService vehicleService, IMapper mapper)
+        public VehicleModelController(IVehicleModelService modelService, IMapper mapper)
         {
-            _vehicleService = vehicleService;
+            _modelService = modelService;
             _mapper = mapper;
         }
 
         public async Task<IActionResult> Index()
         {
-            var models = await _vehicleService.GetAllModelsAsync();
+            var models = await _modelService.GetAllModelsAsync();
             var modelViewModels = _mapper.Map<IEnumerable<VehicleModelViewModel>>(models);
             return View(modelViewModels);
         }
 
         public async Task<IActionResult> Details(int id)
         {
-            var model = await _vehicleService.GetModelAsync(id);
+            var model = await _modelService.GetModelAsync(id);
             if (model == null) return NotFound();
             var modelViewModel = _mapper.Map<VehicleModelViewModel>(model);
             return View(modelViewModel);
@@ -42,13 +42,13 @@ namespace VehicleManagement.MVC.Controllers
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
             var model = _mapper.Map<VehicleModel>(modelViewModel);
-            await _vehicleService.CreateModelAsync(model);
+            await _modelService.CreateModelAsync(model);
             return RedirectToAction(nameof(Index));
         }
 
         public async Task<IActionResult> Edit(int id)
         {
-            var model = await _vehicleService.GetModelAsync(id);
+            var model = await _modelService.GetModelAsync(id);
             if (model == null) return NotFound();
             var modelViewModel = _mapper.Map<VehicleModelViewModel>(model);
             return View(modelViewModel);
@@ -60,13 +60,13 @@ namespace VehicleManagement.MVC.Controllers
             if (id != modelViewModel.Id) return BadRequest();
             if (!ModelState.IsValid) return BadRequest(ModelState);
             var model = _mapper.Map<VehicleModel>(modelViewModel);
-            await _vehicleService.UpdateModelAsync(model);
+            await _modelService.UpdateModelAsync(model);
             return RedirectToAction(nameof(Index));
         }
 
         public async Task<IActionResult> Delete(int id)
         {
-            var model = await _vehicleService.GetModelAsync(id);
+            var model = await _modelService.GetModelAsync(id);
             if (model == null) return NotFound();
             var modelViewModel = _mapper.Map<VehicleModelViewModel>(model);
             return View(modelViewModel);
@@ -75,7 +75,7 @@ namespace VehicleManagement.MVC.Controllers
         [HttpPost, ActionName("Delete")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            await _vehicleService.DeleteModelAsync(id);
+            await _modelService.DeleteModelAsync(id);
             return RedirectToAction(nameof(Index));
         }
     }
