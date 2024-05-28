@@ -19,11 +19,39 @@ namespace VehicleManagement.MVC.Controllers
             _mapper = mapper;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder, string searchString, int? pageNumber)
         {
+            ViewData["NameSortParam"] = string.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            
+
+            if (searchString != null)
+            {
+                pageNumber = 1;
+            }
+
             var makes = await _makeService.GetAllMakesAsync();
-            var makeViewModels = _mapper.Map<IEnumerable<VehicleMakeViewModel>>(makes);
-            return View(makeViewModels);
+
+            // Filtering
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                makes = makes.Where(s => s.Name.Contains(searchString));
+            }
+
+            // Sorting
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    makes = makes.OrderByDescending(s => s.Name);
+                    break;
+                
+                default:
+                    makes = makes.OrderBy(s => s.Name);
+                    break;
+            }
+
+            int pageSize = 10;
+            var paginatedMakes = await PagingHelper.CreateAsync(makes.AsQueryable(), pageNumber ?? 1, pageSize);
+            return View(paginatedMakes);
         }
 
         public async Task<IActionResult> Details(int id)
