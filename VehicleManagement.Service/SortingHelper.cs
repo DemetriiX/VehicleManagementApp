@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Linq;
+using VehicleManagement.Service;
 using VehicleManagement.Service.Models;
 
 public static class SortingHelper
 {
-    public static IQueryable<VehicleMake> ApplySorting(this IQueryable<VehicleMake> query, string sortOrder)
+    public static IQueryable<VehicleMake> ApplySorting(this IQueryable<VehicleMake> query, SortingParameters parameters)
     {
-        switch (sortOrder)
+        switch (parameters.SortOrder)
         {
             case "name_desc":
                 query = query.OrderByDescending(s => s.Name);
@@ -18,9 +19,9 @@ public static class SortingHelper
         return query;
     }
 
-    public static IQueryable<VehicleModel> ApplySorting(this IQueryable<VehicleModel> query, string sortOrder)
+    public static IQueryable<VehicleModel> ApplySorting(this IQueryable<VehicleModel> query, SortingParameters parameters)
     {
-        switch (sortOrder)
+        switch (parameters.SortOrder)
         {
             case "name_desc":
                 query = query.OrderByDescending(s => s.Name);

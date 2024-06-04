@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using VehicleManagement.Service;
 
 public class PaginatedList<T> : List<T>
 {
@@ -30,11 +31,8 @@ public class PaginatedList<T> : List<T>
 
 public static class PagingHelper
 {
-    public static async Task<PaginatedList<T>> CreateAsync<T>(IQueryable<T> source, int pageIndex, int pageSize)
+    public static async Task<PaginatedList<T>> CreateAsync<T>(IQueryable<T> source, PagingParameters parameters) where T : class
     {
-        var count = await source.CountAsync();
-        var items = await source.Skip((pageIndex - 1) * pageSize).Take(pageSize).ToListAsync();
-
-        return new PaginatedList<T>(items, count, pageIndex, pageSize);
+        return await PaginatedList<T>.CreateAsync(source, parameters.PageNumber, parameters.PageSize);
     }
 }

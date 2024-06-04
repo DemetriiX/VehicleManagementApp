@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using VehicleManagement.Shared.ViewModels;
 using VehicleManagement.Service.Interfaces;
 using VehicleManagement.Service.Models;
+using VehicleManagement.Service;
 
 namespace VehicleManagement.MVC.Controllers
 {
@@ -19,10 +20,11 @@ namespace VehicleManagement.MVC.Controllers
 
         public async Task<IActionResult> Index(string sortOrder, string searchString, int? pageNumber)
         {
-            ViewData["CurrentSort"] = sortOrder;
-            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            var sortingParameters = new SortingParameters { SortOrder = sortOrder };
+            var filteringParameters = new FilteringParameters { SearchString = searchString };
+            var pagingParameters = new PagingParameters { PageNumber = pageNumber ?? 1 };
 
-            var paginatedModels = await _modelService.GetModelsAsync(sortOrder, searchString, pageNumber ?? 1, 10);
+            var paginatedModels = await _modelService.GetModelsAsync(sortingParameters, filteringParameters, pagingParameters);
 
             return View(paginatedModels);
         }

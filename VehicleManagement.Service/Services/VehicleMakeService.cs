@@ -29,14 +29,14 @@ namespace VehicleManagement.Service.Services
             return await _context.VehicleMakes.FindAsync(id);
         }
 
-        public async Task<PaginatedList<VehicleMake>> GetMakesAsync(string sortOrder, string searchString, int pageNumber, int pageSize)
+        public async Task<PaginatedList<VehicleMake>> GetMakesAsync(SortingParameters sortingParameters, FilteringParameters filteringParameters, PagingParameters pagingParameters)
         {
             var query = _context.VehicleMakes.AsQueryable();
 
-            query = query.ApplyFiltering(searchString);
-            query = query.ApplySorting(sortOrder);
+            query = query.ApplyFiltering(filteringParameters);
+            query = query.ApplySorting(sortingParameters);
 
-            return await PagingHelper.CreateAsync(query, pageNumber, pageSize);
+            return await PagingHelper.CreateAsync(query, pagingParameters);
         }
 
         public async Task CreateMakeAsync(VehicleMake make)
